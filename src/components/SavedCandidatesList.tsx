@@ -3,7 +3,7 @@ import type Candidate from '../interfaces/Candidate.interface';
 import { IoRemoveCircleSharp } from 'react-icons/io5';
 import { FaSortAmountUp, FaSortAmountDown } from 'react-icons/fa';
 
-//import CSS here;
+import '../assets/styles/SavedCandidateList.css';
 
 const SavedCandidatesList = () => {
     const [savedCandidates, setSavedCandidates] = useState<Candidate[]>([]);
@@ -55,7 +55,7 @@ const SavedCandidatesList = () => {
         },
         [savedCandidates, filterText]
     );
-    
+
     useEffect(() => {
         sortCandidates(sortOrder);
     },
