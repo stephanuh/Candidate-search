@@ -54,7 +54,7 @@ const CandidateSearch = () => {
       setCurrentCandidate(null);
     }
   };
-  const addToSavedList = () => {
+  const addToSavedCandidatesList = () => {
     try{
       const savedCandidates: Candidate[] = JSON.parse(localStorage.getItem('savedCandidates') ?? '[]') as Candidate[];
       savedCandidates.push(currentCandidate!);
@@ -70,8 +70,8 @@ const CandidateSearch = () => {
     <section id="searchSection"></section>
     <CandidateCard
     currentCandidate={currentCandidate}
-    addToSavedList={addToSavedList}
-    addRandomCandidate={handleNextCandidate}
+    addToSavedCandidatesList={addToSavedCandidatesList}
+    getRandomCandidate={handleNextCandidate}
     />
     </>
   )
