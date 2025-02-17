@@ -33,7 +33,7 @@ body {
   background-repeat: no-repeat no-repeat;
   background-position: center center;
   margin: 0;
-  place-items: center;
+  /* place-items: center; */
   min-width: 320px;
   min-height: 100vh;
 }
@@ -89,12 +89,19 @@ tr {
   background-color: #000;
   color: white;
 }
-
+td{
+  padding: 0.5rem;
+  vertical-align: middle;
+}
+tr .graphic-cell {
+  text-align: center;
+}
 tbody tr:nth-child(odd) {
   background-color: #333333;
 }
 
 .nav {
+  margin: 0;
   display: flex;
   justify-content: flex-start;
   padding: 1em 2em;
@@ -117,4 +124,23 @@ tbody tr:nth-child(odd) {
 .table {
   width: 80vw;
   table-layout: fixed;
+}
+.search-button {
+  font-size: 5rem;
+  cursor: pointer;
+  padding: 0 1rem;
+  position: absolute;
+}
+.reject-button {
+  color: red;
+  left: 0;
+}
+.add-button {
+  color: green;
+  right: 0;
+}
+.delete-button {
+  font-size: 2rem;
+  cursor: pointer;
+  color: red;
 }

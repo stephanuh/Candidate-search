@@ -8,11 +8,11 @@ import '../assets/styles/SavedCandidateList.css';
 const SavedCandidatesList = () => {
     const [savedCandidates, setSavedCandidates] = useState<Candidate[]>([]);
     const [sortedCandidates, setSortedCandidates] = useState<Candidate[]>([]);
-    const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
-    const [filterText, setFilterText] = useState<string>('');
+    const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+    const [filterText, setFilterText] = useState<string>("");
 
     useEffect(() => {
-        const savedCandidatesStorage = localStorage.getItem('savedCandidates');
+        const savedCandidatesStorage = localStorage.getItem("savedCandidates");
         const parsedCandidates: Candidate[] = savedCandidatesStorage ? (JSON.parse(savedCandidatesStorage) as Candidate[])
          : [];
         setSavedCandidates(parsedCandidates);
@@ -23,13 +23,13 @@ const SavedCandidatesList = () => {
             const updatedCandidates = savedCandidates.filter((candidate) => 
                 candidate.login !== candidateRemoved.login);
 
-            localStorage.setItem('savedCandidates', JSON.stringify(updatedCandidates));
+            localStorage.setItem("savedCandidates", JSON.stringify(updatedCandidates));
             setSavedCandidates(updatedCandidates);
             setSortedCandidates(updatedCandidates);
         };
 
         const handleSort = () => {
-            const newSortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+            const newSortOrder = sortOrder === "asc" ? "desc" : "asc";
             setSortOrder(newSortOrder);
             sortCandidates(newSortOrder);
         };
@@ -38,7 +38,7 @@ const SavedCandidatesList = () => {
             setFilterText(filterValue);
         };
 
-        const sortCandidates = useCallback((order: 'asc' | 'desc') => {
+        const sortCandidates = useCallback((order: "asc" | "desc") => {
             const filteredCandidates = savedCandidates.filter((candidate) => {
                 if (filterText === ""){
                     return true;
@@ -48,8 +48,8 @@ const SavedCandidatesList = () => {
 
             const sortedArray = [...filteredCandidates];
             sortedArray.sort((a, b) => {
-                const compareResult = (a.login ?? '').localeCompare(b.login ?? '');
-                return order === 'asc' ? compareResult : -compareResult;
+                const compareResult = (a.login ?? "").localeCompare(b.login ?? "");
+                return order === "asc" ? compareResult : -compareResult;
             });
             setSortedCandidates(sortedArray);
         },
@@ -61,23 +61,24 @@ const SavedCandidatesList = () => {
     },
     [filterText, sortOrder, savedCandidates, sortCandidates]
     );
+
     return(
         <div>
             {savedCandidates.length > 0 && (
                 <div className="control-container">
                     <div>
                         <label htmlFor="bio-filter">Filter Bio: </label>
-                        <input type="text" id="bio-filter" value={filterText} onChange={filterChanged} placeholder='Search by bio'/>
+                        <input type="text" id="bio-filter" value={filterText} onChange={filterChanged} placeholder="Search by bio"/>
                     </div>
                     <button onClick={handleSort}>
-                        {sortOrder === 'asc' ? <FaSortAmountUp /> : <FaSortAmountDown />}
+                        {sortOrder === "asc" ? <FaSortAmountUp /> : <FaSortAmountDown />}
                     </button>
                 </div>
             )}
             {sortedCandidates.length === 0 ? (
-                <div className='none-remaining'> There are no potential candidates.</div>
+                <div className='none-remaining'> No candidates found. Try again later!.</div>
             ) : (
-                <table className='table'>
+                <table className="table">
                     <thead>
                         <tr>
                             <th>Image</th>
@@ -93,18 +94,25 @@ const SavedCandidatesList = () => {
                         {sortedCandidates.map((candidate) => (
                             <tr key={candidate.login}>
                                 <td className='graphic-cell'>
-                                    <a href={candidate.html_url ?? ''} target='_blank' rel='noreferrer'>
-                                        <img src={candidate.avatar_url ?? ''} alt={`${candidate.name}'s avatar`} 
+                                    <a href={candidate.html_url ?? ""} target="_blank" rel="noreferrer">
+                                        <img src={candidate.avatar_url ?? ""} alt={`${candidate.name}'s avatar`} 
                                         style={{
-                                            width: '50px',
-                                            height: '50px',
-                                            objectFit: 'cover',
-                                            borderRadius: '50%',
+                                            width: "50px",
+                                            height: "50px",
+                                            objectFit: "cover",
+                                            borderRadius: "50%",
                                             }}
                                             />
                                     </a>
                                 </td>
-                                <td>
+                                
+                                    <td>
+                                        {candidate.login} ({candidate.name ?? "N/A"})
+                                    </td>
+                                    <td>
+                                        {candidate.location ?? "N/A"}
+                                    </td>
+                                    <td>
                                     {candidate.email ? (
                                         <a href={`mailto:${candidate.email}`}>{candidate.email}</a>
                                     ) : (

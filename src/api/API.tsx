@@ -43,14 +43,14 @@ const searchGithubUser = async (username: string): Promise<Candidate> => {
   } catch (err) {
     // console.log('an error occurred', err);
     return {
+      avatar_url: "",
       name: "",
       login: "",
       location: "",
       email: "",
       company: "",
-      bio: "",
       html_url: "",
-      avatar_url: "",
+      bio: "",
     };
   }
 };

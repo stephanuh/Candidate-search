@@ -18,10 +18,11 @@ const CandidateSearch = () => {
     };
     void fetchCandidates();
   }, []);
+
   const getRandomCandidateBatch = async () => {
     try {
       const userBatch: { login: string }[] = await searchGithub();
-      if (Array.isArray(userBatch) && userBatch.length > 0){
+      if (Array.isArray(userBatch) && userBatch.length > 0) {
         const validCandidates: Candidate[] = [];
         const userDetailsPromises = userBatch.map(async (user) => {
           try {
@@ -33,6 +34,7 @@ const CandidateSearch = () => {
             console.error(`Error fetching details for user ${user.login}:`, err);
           }
         });
+
         await Promise.all(userDetailsPromises);
         setCandidatesBatch(validCandidates);
         setCurrentIndex(0);
@@ -56,14 +58,15 @@ const CandidateSearch = () => {
   };
   const addToSavedCandidatesList = () => {
     try{
-      const savedCandidates: Candidate[] = JSON.parse(localStorage.getItem('savedCandidates') ?? '[]') as Candidate[];
+      const savedCandidates: Candidate[] = JSON.parse(localStorage.getItem("savedCandidates") ?? "[]") as Candidate[];
       savedCandidates.push(currentCandidate!);
-      localStorage.setItem('savedCandidates', JSON.stringify(savedCandidates));
+      localStorage.setItem("savedCandidates", JSON.stringify(savedCandidates));
     } catch (err) {
       console.error('Error saving candidate:', err);
     }
     handleNextCandidate();
   };
+
   return (
     <>
     <h1>Candidate Search</h1>

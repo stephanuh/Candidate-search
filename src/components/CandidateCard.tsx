@@ -17,6 +17,7 @@ const CandidateCard = ({
     getRandomCandidate,
     isSaved = false,
 }: CandidateCardProps) => {
+
     return (
         <div className="candidate-card-wrapper">
             <div className="candidate-card">
@@ -33,7 +34,7 @@ const CandidateCard = ({
                             {currentCandidate.name ? `(${currentCandidate.name})` : ""}
                         </h2>
                         <p>Location: {currentCandidate.location ?? ""}</p>
-                        <p>Email:{' '} {currentCandidate.email ? (
+                        <p>Email:{" "} {currentCandidate.email ? (
                             <a href={`mailto:${currentCandidate.email}`}>
                                 {currentCandidate.email}
                             </a>
@@ -46,10 +47,11 @@ const CandidateCard = ({
                         </div>
                     </>
                 ) : (
-                    <div className="none-remain"> No more candidate are available</div>
+                    <div className="none-remain"> No more available candidates</div>
                 )}
             </div>
-            <div className="buttons-container">{!isSaved && currentCandidate && (
+            <div className="buttons-container">
+                {!isSaved && currentCandidate && (
                 <>
                 <IoRemoveCircleSharp className="search-button reject-button" onClick={() =>
                     getRandomCandidate?.()}/>
