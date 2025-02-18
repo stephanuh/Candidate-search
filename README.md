@@ -2,7 +2,9 @@
 ## Description
 A web application that fetches GutHub users and displays them as potential candidates. Users can browse through profiles, save candidates, and filter by bio.
 
-[Click here]() to see the action!
+[Click here](https://candidate-search-k621.onrender.com) to see the action!
+
+![homepage](images/candidate-profile.PNG) 
 
 ## Installation
 For installation follow these steps:
@@ -19,10 +21,6 @@ For installation follow these steps:
 
 
 It will look like the following photos below: 
-
-
-![homepage](images/candidate-profile.PNG) 
-
 
 ![candidatepage](images/Other-Candidates.PNG)
 
